@@ -32,7 +32,11 @@
             AdminPage = new TabPage();
             TableLayoutPanel = new TableLayoutPanel();
             GameBox = new GroupBox();
+            GamePictureBox = new PictureBox();
             BotBox = new GroupBox();
+            ClearLogsButton = new Button();
+            LogsLabel = new Label();
+            LogsTextBox = new RichTextBox();
             DisableBotButton = new Button();
             EnableBotButton = new Button();
             TokenTextBox = new TextBox();
@@ -42,6 +46,8 @@
             TabControl.SuspendLayout();
             AdminPage.SuspendLayout();
             TableLayoutPanel.SuspendLayout();
+            GameBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GamePictureBox).BeginInit();
             BotBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -84,6 +90,7 @@
             // 
             // GameBox
             // 
+            GameBox.Controls.Add(GamePictureBox);
             GameBox.Dock = DockStyle.Fill;
             GameBox.Location = new Point(238, 3);
             GameBox.Name = "GameBox";
@@ -92,8 +99,20 @@
             GameBox.TabStop = false;
             GameBox.Text = "Игра";
             // 
+            // GamePictureBox
+            // 
+            GamePictureBox.Location = new Point(14, 101);
+            GamePictureBox.Name = "GamePictureBox";
+            GamePictureBox.Size = new Size(200, 200);
+            GamePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            GamePictureBox.TabIndex = 0;
+            GamePictureBox.TabStop = false;
+            // 
             // BotBox
             // 
+            BotBox.Controls.Add(ClearLogsButton);
+            BotBox.Controls.Add(LogsLabel);
+            BotBox.Controls.Add(LogsTextBox);
             BotBox.Controls.Add(DisableBotButton);
             BotBox.Controls.Add(EnableBotButton);
             BotBox.Controls.Add(TokenTextBox);
@@ -106,6 +125,34 @@
             BotBox.TabIndex = 0;
             BotBox.TabStop = false;
             BotBox.Text = "Бот";
+            // 
+            // ClearLogsButton
+            // 
+            ClearLogsButton.Location = new Point(47, 343);
+            ClearLogsButton.Name = "ClearLogsButton";
+            ClearLogsButton.Size = new Size(135, 24);
+            ClearLogsButton.TabIndex = 7;
+            ClearLogsButton.Text = "Очистить логи";
+            ClearLogsButton.UseVisualStyleBackColor = true;
+            ClearLogsButton.Click += ClearLogsButton_Click;
+            // 
+            // LogsLabel
+            // 
+            LogsLabel.AutoSize = true;
+            LogsLabel.Location = new Point(97, 117);
+            LogsLabel.Name = "LogsLabel";
+            LogsLabel.Size = new Size(34, 15);
+            LogsLabel.TabIndex = 6;
+            LogsLabel.Text = "Логи";
+            // 
+            // LogsTextBox
+            // 
+            LogsTextBox.Location = new Point(6, 135);
+            LogsTextBox.Name = "LogsTextBox";
+            LogsTextBox.ReadOnly = true;
+            LogsTextBox.Size = new Size(217, 202);
+            LogsTextBox.TabIndex = 5;
+            LogsTextBox.Text = "";
             // 
             // DisableBotButton
             // 
@@ -141,7 +188,7 @@
             // 
             BotStatusTextLabel.AutoSize = true;
             BotStatusTextLabel.ForeColor = Color.Red;
-            BotStatusTextLabel.Location = new Point(86, 19);
+            BotStatusTextLabel.Location = new Point(79, 19);
             BotStatusTextLabel.Name = "BotStatusTextLabel";
             BotStatusTextLabel.Size = new Size(64, 15);
             BotStatusTextLabel.TabIndex = 1;
@@ -175,9 +222,12 @@
             MinimumSize = new Size(500, 500);
             Name = "MainForm";
             Text = "Крестики-нолики";
+            Load += MainForm_Load;
             TabControl.ResumeLayout(false);
             AdminPage.ResumeLayout(false);
             TableLayoutPanel.ResumeLayout(false);
+            GameBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)GamePictureBox).EndInit();
             BotBox.ResumeLayout(false);
             BotBox.PerformLayout();
             ResumeLayout(false);
@@ -196,5 +246,9 @@
         private Label BotStatusLabel;
         private Button EnableBotButton;
         private Button DisableBotButton;
+        private Label LogsLabel;
+        private Button ClearLogsButton;
+        private RichTextBox LogsTextBox;
+        private PictureBox GamePictureBox;
     }
 }
