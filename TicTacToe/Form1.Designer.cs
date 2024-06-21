@@ -32,7 +32,16 @@
             AdminPage = new TabPage();
             TableLayoutPanel = new TableLayoutPanel();
             GameBox = new GroupBox();
-            GamePictureBox = new PictureBox();
+            GameViewPanel = new TableLayoutPanel();
+            Cell9 = new PictureBox();
+            Cell8 = new PictureBox();
+            Cell7 = new PictureBox();
+            Cell6 = new PictureBox();
+            Cell5 = new PictureBox();
+            Cell4 = new PictureBox();
+            Cell3 = new PictureBox();
+            Cell2 = new PictureBox();
+            Cell1 = new PictureBox();
             BotBox = new GroupBox();
             ClearLogsButton = new Button();
             LogsLabel = new Label();
@@ -43,11 +52,24 @@
             BotStatusTextLabel = new Label();
             BotStatusLabel = new Label();
             GamePage = new TabPage();
+            BorderPanel1 = new Panel();
+            BorderPanel2 = new Panel();
+            BorderPanel3 = new Panel();
+            BorderPanel4 = new Panel();
             TabControl.SuspendLayout();
             AdminPage.SuspendLayout();
             TableLayoutPanel.SuspendLayout();
             GameBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)GamePictureBox).BeginInit();
+            GameViewPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Cell9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Cell1).BeginInit();
             BotBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,7 +112,11 @@
             // 
             // GameBox
             // 
-            GameBox.Controls.Add(GamePictureBox);
+            GameBox.Controls.Add(BorderPanel4);
+            GameBox.Controls.Add(BorderPanel3);
+            GameBox.Controls.Add(BorderPanel2);
+            GameBox.Controls.Add(BorderPanel1);
+            GameBox.Controls.Add(GameViewPanel);
             GameBox.Dock = DockStyle.Fill;
             GameBox.Location = new Point(238, 3);
             GameBox.Name = "GameBox";
@@ -99,14 +125,146 @@
             GameBox.TabStop = false;
             GameBox.Text = "Игра";
             // 
-            // GamePictureBox
+            // GameViewPanel
             // 
-            GamePictureBox.Location = new Point(14, 101);
-            GamePictureBox.Name = "GamePictureBox";
-            GamePictureBox.Size = new Size(200, 200);
-            GamePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            GamePictureBox.TabIndex = 0;
-            GamePictureBox.TabStop = false;
+            GameViewPanel.ColumnCount = 3;
+            GameViewPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            GameViewPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            GameViewPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
+            GameViewPanel.Controls.Add(Cell9, 2, 2);
+            GameViewPanel.Controls.Add(Cell8, 1, 2);
+            GameViewPanel.Controls.Add(Cell7, 0, 2);
+            GameViewPanel.Controls.Add(Cell6, 2, 1);
+            GameViewPanel.Controls.Add(Cell5, 1, 1);
+            GameViewPanel.Controls.Add(Cell4, 0, 1);
+            GameViewPanel.Controls.Add(Cell3, 2, 0);
+            GameViewPanel.Controls.Add(Cell2, 1, 0);
+            GameViewPanel.Controls.Add(Cell1, 0, 0);
+            GameViewPanel.Location = new Point(14, 110);
+            GameViewPanel.Name = "GameViewPanel";
+            GameViewPanel.RowCount = 3;
+            GameViewPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            GameViewPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            GameViewPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            GameViewPanel.Size = new Size(200, 200);
+            GameViewPanel.TabIndex = 0;
+            // 
+            // Cell9
+            // 
+            Cell9.Dock = DockStyle.Fill;
+            Cell9.Image = Properties.Resources.cross;
+            Cell9.Location = new Point(135, 135);
+            Cell9.Name = "Cell9";
+            Cell9.Size = new Size(62, 62);
+            Cell9.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell9.TabIndex = 8;
+            Cell9.TabStop = false;
+            Cell9.Visible = false;
+            Cell9.Click += Cell_Click;
+            // 
+            // Cell8
+            // 
+            Cell8.Dock = DockStyle.Fill;
+            Cell8.Image = Properties.Resources.cross;
+            Cell8.Location = new Point(69, 135);
+            Cell8.Name = "Cell8";
+            Cell8.Size = new Size(60, 62);
+            Cell8.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell8.TabIndex = 7;
+            Cell8.TabStop = false;
+            Cell8.Visible = false;
+            Cell8.Click += Cell_Click;
+            // 
+            // Cell7
+            // 
+            Cell7.Dock = DockStyle.Fill;
+            Cell7.Image = Properties.Resources.cross;
+            Cell7.Location = new Point(3, 135);
+            Cell7.Name = "Cell7";
+            Cell7.Size = new Size(60, 62);
+            Cell7.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell7.TabIndex = 6;
+            Cell7.TabStop = false;
+            Cell7.Visible = false;
+            Cell7.Click += Cell_Click;
+            // 
+            // Cell6
+            // 
+            Cell6.Dock = DockStyle.Fill;
+            Cell6.Image = Properties.Resources.cross;
+            Cell6.Location = new Point(135, 69);
+            Cell6.Name = "Cell6";
+            Cell6.Size = new Size(62, 60);
+            Cell6.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell6.TabIndex = 5;
+            Cell6.TabStop = false;
+            Cell6.Visible = false;
+            Cell6.Click += Cell_Click;
+            // 
+            // Cell5
+            // 
+            Cell5.Dock = DockStyle.Fill;
+            Cell5.Image = Properties.Resources.cross;
+            Cell5.Location = new Point(69, 69);
+            Cell5.Name = "Cell5";
+            Cell5.Size = new Size(60, 60);
+            Cell5.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell5.TabIndex = 4;
+            Cell5.TabStop = false;
+            Cell5.Visible = false;
+            Cell5.Click += Cell_Click;
+            // 
+            // Cell4
+            // 
+            Cell4.Dock = DockStyle.Fill;
+            Cell4.Image = Properties.Resources.cross;
+            Cell4.Location = new Point(3, 69);
+            Cell4.Name = "Cell4";
+            Cell4.Size = new Size(60, 60);
+            Cell4.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell4.TabIndex = 3;
+            Cell4.TabStop = false;
+            Cell4.Visible = false;
+            Cell4.Click += Cell_Click;
+            // 
+            // Cell3
+            // 
+            Cell3.Dock = DockStyle.Fill;
+            Cell3.Image = Properties.Resources.cross;
+            Cell3.Location = new Point(135, 3);
+            Cell3.Name = "Cell3";
+            Cell3.Size = new Size(62, 60);
+            Cell3.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell3.TabIndex = 2;
+            Cell3.TabStop = false;
+            Cell3.Visible = false;
+            Cell3.Click += Cell_Click;
+            // 
+            // Cell2
+            // 
+            Cell2.Dock = DockStyle.Fill;
+            Cell2.Image = Properties.Resources.cross;
+            Cell2.Location = new Point(69, 3);
+            Cell2.Name = "Cell2";
+            Cell2.Size = new Size(60, 60);
+            Cell2.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell2.TabIndex = 1;
+            Cell2.TabStop = false;
+            Cell2.Visible = false;
+            Cell2.Click += Cell_Click;
+            // 
+            // Cell1
+            // 
+            Cell1.Dock = DockStyle.Fill;
+            Cell1.Image = Properties.Resources.cross;
+            Cell1.Location = new Point(3, 3);
+            Cell1.Name = "Cell1";
+            Cell1.Size = new Size(60, 60);
+            Cell1.SizeMode = PictureBoxSizeMode.StretchImage;
+            Cell1.TabIndex = 0;
+            Cell1.TabStop = false;
+            Cell1.Visible = false;
+            Cell1.Click += Cell_Click;
             // 
             // BotBox
             // 
@@ -213,6 +371,42 @@
             GamePage.Text = "Игра";
             GamePage.UseVisualStyleBackColor = true;
             // 
+            // BorderPanel1
+            // 
+            BorderPanel1.BackColor = Color.Black;
+            BorderPanel1.ForeColor = Color.Black;
+            BorderPanel1.Location = new Point(77, 109);
+            BorderPanel1.Name = "BorderPanel1";
+            BorderPanel1.Size = new Size(5, 200);
+            BorderPanel1.TabIndex = 1;
+            // 
+            // BorderPanel2
+            // 
+            BorderPanel2.BackColor = Color.Black;
+            BorderPanel2.ForeColor = Color.Black;
+            BorderPanel2.Location = new Point(143, 109);
+            BorderPanel2.Name = "BorderPanel2";
+            BorderPanel2.Size = new Size(5, 200);
+            BorderPanel2.TabIndex = 2;
+            // 
+            // BorderPanel3
+            // 
+            BorderPanel3.BackColor = Color.Black;
+            BorderPanel3.ForeColor = Color.Black;
+            BorderPanel3.Location = new Point(14, 173);
+            BorderPanel3.Name = "BorderPanel3";
+            BorderPanel3.Size = new Size(200, 5);
+            BorderPanel3.TabIndex = 2;
+            // 
+            // BorderPanel4
+            // 
+            BorderPanel4.BackColor = Color.Black;
+            BorderPanel4.ForeColor = Color.Black;
+            BorderPanel4.Location = new Point(14, 239);
+            BorderPanel4.Name = "BorderPanel4";
+            BorderPanel4.Size = new Size(200, 5);
+            BorderPanel4.TabIndex = 3;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -227,7 +421,16 @@
             AdminPage.ResumeLayout(false);
             TableLayoutPanel.ResumeLayout(false);
             GameBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)GamePictureBox).EndInit();
+            GameViewPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Cell9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Cell1).EndInit();
             BotBox.ResumeLayout(false);
             BotBox.PerformLayout();
             ResumeLayout(false);
@@ -249,6 +452,19 @@
         private Label LogsLabel;
         private Button ClearLogsButton;
         private RichTextBox LogsTextBox;
-        private PictureBox GamePictureBox;
+        private TableLayoutPanel GameViewPanel;
+        private PictureBox Cell1;
+        private PictureBox Cell9;
+        private PictureBox Cell8;
+        private PictureBox Cell7;
+        private PictureBox Cell6;
+        private PictureBox Cell5;
+        private PictureBox Cell4;
+        private PictureBox Cell3;
+        private PictureBox Cell2;
+        private Panel BorderPanel4;
+        private Panel BorderPanel3;
+        private Panel BorderPanel2;
+        private Panel BorderPanel1;
     }
 }

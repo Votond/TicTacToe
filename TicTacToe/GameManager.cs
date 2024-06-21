@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using static TicTacToe.GameManager.Game;
+﻿using static TicTacToe.GameManager.Game;
 
 namespace TicTacToe
 {
@@ -11,6 +10,13 @@ namespace TicTacToe
 
         public class Game
         {
+            public enum TurnStatus
+            {
+                Successful,
+                NoTurn,
+                NoAbilityToTurn
+            }
+
             public class PlayerInfo
             {
                 public enum PlayerState
@@ -19,14 +25,22 @@ namespace TicTacToe
                     Waiting
                 }
 
-                public PlayerInfo(string userId, PlayerState state)
+                public enum PlayerChar
+                {
+                    Cross,
+                    Circle
+                }
+
+                public PlayerInfo(string userId, PlayerState state, PlayerChar playerChar)
                 {
                     UserId = userId;
                     State = state;
+                    Char = playerChar;
                 }
 
                 public string UserId { get; private set; }
-                public PlayerState State { get; private set; }
+                public PlayerState State { get; set; }
+                public PlayerChar Char { get; private set; }
             }
 
 
@@ -78,20 +92,163 @@ namespace TicTacToe
 
                 TelegramBot.Instance.SendImage(PlayerOne.UserId, image);
                 TelegramBot.Instance.SendImage(PlayerTwo.UserId, image);
+            }
 
-                Program.MainForm.UpdateGameView(image);
+            public TurnStatus MakeTurn(string playerId, int cell)
+            {
+                var player = GetPlayerById(playerId);
+
+                if (player.State != PlayerInfo.PlayerState.Turn)
+                {
+                    return TurnStatus.NoTurn;
+                }
+
+                cell--;
+
+                if (FieldInfo.Cells[cell] != PlayingFieldInfo.CellState.None)
+                {
+                    return TurnStatus.NoAbilityToTurn;
+                }
+
+                if (player.Char == PlayerInfo.PlayerChar.Circle)
+                    FieldInfo.Cells[cell] = PlayingFieldInfo.CellState.Circle;
+                else
+                    FieldInfo.Cells[cell] = PlayingFieldInfo.CellState.Cross;
+
+                CheckForWin(cell, player);
+                SwapState();
+
+                return TurnStatus.Successful;
+            }
+
+            public PlayerInfo GetPlayerById(string playerId) => (PlayerOne.UserId == playerId) ? PlayerOne : PlayerTwo;
+
+            private void SwapState()
+            {
+                if (PlayerOne.State == PlayerInfo.PlayerState.Turn)
+                {
+                    PlayerOne.State = PlayerInfo.PlayerState.Waiting;
+                    PlayerTwo.State = PlayerInfo.PlayerState.Turn;
+                }
+                else
+                {
+                    PlayerOne.State = PlayerInfo.PlayerState.Turn;
+                    PlayerTwo.State = PlayerInfo.PlayerState.Waiting;
+                }
+            }
+
+            private void CheckForWin(int cell, PlayerInfo player)
+            {
+                var cells = FieldInfo.Cells;
+                var playerChar = (player.Char == PlayerInfo.PlayerChar.Circle) ? PlayingFieldInfo.CellState.Circle : PlayingFieldInfo.CellState.Cross;
+
+                void Win()
+                {
+                    TelegramBot.Instance.Win(player.UserId);
+                    Instance._games.Remove(this);
+                }
+
+                bool Check(int i) => cells[i] == playerChar;
+
+                switch (cell)
+                {
+                    case 0:
+                        if (Check(1) && Check(2))
+                            Win();
+                        else if (Check(3) && Check(6))
+                            Win();
+                        else if (Check(4) && Check(8))
+                            Win();
+                        break;
+
+                    case 1:
+                        if (Check(0) && Check(2))
+                            Win();
+                        else if (Check(4) && Check(7))
+                            Win();
+                        break;
+
+                    case 2:
+                        if (Check(0) && Check(1))
+                            Win();
+                        else if (Check(5) && Check(8))
+                            Win();
+                        else if (Check(4) && Check(6))
+                            Win();
+                        break;
+
+                    case 3:
+                        if (Check(0) && Check(6))
+                            Win();
+                        else if (Check(4) && Check(5))
+                            Win();
+                        break;
+
+                    case 4:
+                        if (Check(0) && Check(8))
+                            Win();
+                        else if (Check(6) && Check(2))
+                            Win();
+                        else if (Check(1) && Check(7))
+                            Win();
+                        else if (Check(3) && Check(5))
+                            Win();
+                        break;
+
+                    case 5:
+                        if (Check(2) && Check(8))
+                            Win();
+                        else if (Check(3) && Check(4))
+                            Win();
+                        break;
+
+                    case 6:
+                        if (Check(0) && Check(3))
+                            Win();
+                        else if (Check(7) && Check(8))
+                            Win();
+                        else if (Check(4) && Check(2))
+                            Win();
+                        break;
+
+                    case 7:
+                        if (Check(6) && Check(8))
+                            Win();
+                        else if (Check(4) && Check(1))
+                            Win();
+                        break;
+
+                    case 8:
+                        if (Check(6) && Check(7))
+                            Win();
+                        else if (Check(2) && Check(5))
+                            Win();
+                        else if (Check(4) && Check(0))
+                            Win();
+                        break;
+                }
             }
         }
 
         public void StartNewGame(string firstPlayerId, string secondPlayerId)
         {
-            var game = new Game(
-                new PlayerInfo(firstPlayerId, PlayerInfo.PlayerState.Turn),
-                new PlayerInfo(secondPlayerId, PlayerInfo.PlayerState.Waiting)
-            );
-            game.Start();
+            Game game;
+            
+            if (new Random().Next(0, 100) > 50)
+                game = new Game(
+                new PlayerInfo(firstPlayerId, PlayerInfo.PlayerState.Turn, PlayerInfo.PlayerChar.Cross),
+                new PlayerInfo(secondPlayerId, PlayerInfo.PlayerState.Waiting, PlayerInfo.PlayerChar.Circle)
+                );
+            else
+                game = new Game(
+                    new PlayerInfo(firstPlayerId, PlayerInfo.PlayerState.Waiting, PlayerInfo.PlayerChar.Circle),
+                    new PlayerInfo(secondPlayerId, PlayerInfo.PlayerState.Turn, PlayerInfo.PlayerChar.Cross)
+                );
 
             _games.Add(game);
+            game.Start();
         }
+
+        public Game? GetGameByPlayerId(string userId) => _games.Find(game => game.PlayerOne.UserId == userId || game.PlayerTwo.UserId == userId);
     }
 }

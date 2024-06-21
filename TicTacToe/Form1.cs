@@ -1,6 +1,6 @@
 namespace TicTacToe
 {
-    public partial class MainForm : Form
+    internal partial class MainForm : Form
     {
         public MainForm()
         {
@@ -12,9 +12,23 @@ namespace TicTacToe
             LogsTextBox.Text += message;
         }
 
-        public void UpdateGameView(Image image)
+        public void UpdateGameView(GameManager.Game.PlayingFieldInfo.CellState[] cells)
         {
-            GamePictureBox.Image = image;
+            int i = 0;
+            foreach (var cell in cells)
+            {
+                if (cell != GameManager.Game.PlayingFieldInfo.CellState.None)
+                {
+                    ((PictureBox) GameViewPanel.Controls[i]).Visible = true;
+                    ((PictureBox) GameViewPanel.Controls[i]).Image = (cell == GameManager.Game.PlayingFieldInfo.CellState.Cross) ? Properties.Resources.cross : Properties.Resources.circle;
+                }
+                else
+                {
+                    ((PictureBox) GameViewPanel.Controls[i]).Visible = false;
+                }
+
+                i++;
+            }
         }
 
         private void EnableBotButton_Click(object sender, EventArgs e)
@@ -55,6 +69,11 @@ namespace TicTacToe
         private void MainForm_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
+        }
+
+        private void Cell_Click(object sender, EventArgs e)
+        {
+            ((PictureBox) sender).Image = (((PictureBox)sender).Image == Properties.Resources.cross) ? Properties.Resources.circle : Properties.Resources.cross;
         }
     }
 }

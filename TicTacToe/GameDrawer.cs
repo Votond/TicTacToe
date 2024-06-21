@@ -53,6 +53,7 @@
                 var crossBrush = new Pen(Color.IndianRed, 20).Brush;
                 var crossChar = "\u2716";
 
+                // Background
                 g.Clear(backgroundColor);
 
                 // Borders
@@ -93,39 +94,9 @@
                     else
                         g.DrawString(crossChar, crossFont, crossBrush, x, y);
                 }
-                /*// Circles
-                // Up
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, -65, -110);
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, 105, -110);
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, 280, -110);
-
-                // Middle
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, -65, 60);
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, 105, 60);
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, 280, 60);
-
-                // Down
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, -65, 230);
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, 105, 230);
-                g.DrawString("\u25cb", new Font(new FontFamily("Arial"), 230, FontStyle.Regular), circlesBrush, 280, 230);
-
-                // Crosses
-                // Up
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, -20, 10);
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, 150, 10);
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, 325, 10);
-
-                // Middle
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, -20, 180);
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, 150, 180);
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, 325, 180);
-
-                // Down
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, -20, 350);
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, 150, 350);
-                g.DrawString("\u2716", new Font(new FontFamily("Arial"), 100, FontStyle.Regular), crossBrush, 325, 350);*/
             }
 
+            Program.MainForm.UpdateGameView(game.FieldInfo.Cells);
             return bmp;
         }
     }

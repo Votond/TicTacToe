@@ -41,7 +41,7 @@ namespace TicTacToe
             _botUser = await _botClient.GetMeAsync(_cts.Token);
             IsLaunched = true;
 
-            await Logs.Info("Бот запущен");
+            Logs.Info("Бот запущен");
         }
 
         private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
@@ -52,7 +52,7 @@ namespace TicTacToe
             if (update.Message.Text == null)
                 return;
 
-            await Logs.Info("Бот принял апдейт");
+            Logs.Info("Бот принял апдейт");
 
             var message = update.Message;
             string messageText = update.Message.Text;
@@ -70,12 +70,57 @@ namespace TicTacToe
                     return;
                 }
 
-                NewGame(chatId, split[1]);
+                GameManager.Instance.StartNewGame(chatId.ToString(), split[1]);
+            }
+            else if (messageText.Contains("/turn"))
+            {
+                var split = messageText.Split(' ');
+
+                if (split.Length < 2)
+                {
+                    IncorrectInput(chatId);
+                    return;
+                }
+
+                var game = GameManager.Instance.GetGameByPlayerId(chatId.ToString());
+
+                if (game == null)
+                {
+                    NoGame(chatId);
+                    return;
+                }
+
+                var turnStatus = game.MakeTurn(chatId.ToString(), Convert.ToInt32(split[1]));
+
+                if (turnStatus == GameManager.Game.TurnStatus.NoTurn)
+                {
+                    NoTurn(chatId);
+                    return;
+                }
+
+                if (turnStatus == GameManager.Game.TurnStatus.NoAbilityToTurn)
+                {
+                    NoAbilityToTurn(chatId);
+                    return;
+                }
+
+                string player2;
+
+                if (game.PlayerOne.UserId == chatId.ToString())
+                    player2 = game.PlayerTwo.UserId;
+                else
+                    player2 = game.PlayerOne.UserId;
+
+                SuccessfullyTurned(chatId);
+                SuccessfullyTurnedOther(new ChatId(Convert.ToInt64(player2)), chatId.ToString());
+
+                SendImage(chatId, GameDrawer.Instance.Draw(game));
+                SendImage(player2, GameDrawer.Instance.Draw(game));
             }
             else
                 IncorrectInput(chatId);
 
-            await Logs.Info("Бот обработал апдейт");
+            Logs.Info("Бот обработал апдейт");
         }
 
         private async Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
@@ -87,7 +132,7 @@ namespace TicTacToe
                 _ => exception.ToString()
             };
 
-            await Logs.Error(ErrorMessage);
+            Logs.Error(ErrorMessage);
         }
 
         public async Task Shutdown()
@@ -97,7 +142,7 @@ namespace TicTacToe
 
             _cts.Cancel();
             IsLaunched = false;
-            await Logs.Info("Бот отключен");
+            Logs.Info("Бот отключен");
         }
 
         public async void SendMessage(ChatId chatId, string message) => await _botClient.SendTextMessageAsync
@@ -120,16 +165,14 @@ namespace TicTacToe
         }
 
         private void IncorrectInput(ChatId chatId) => SendMessage(chatId, "❌ Некорректный ввод");
+        private void NoGame(ChatId chatId) => SendMessage(chatId, "❌ У вас нет идущей игры");
+        private void NoTurn(ChatId chatId) => SendMessage(chatId, "❌ Сейчас не ваш ход");
+        private void NoAbilityToTurn(ChatId chatId) => SendMessage(chatId, "❌ Вы не можете так сходить");
+        private void SuccessfullyTurned(ChatId chatId) => SendMessage(chatId, "✅ Вы совершили ход");
+        private void SuccessfullyTurnedOther(ChatId chatId, string userId) => SendMessage(chatId, $"✅ [{userId}] совершил ход");
+        public void Win(ChatId chatId) => SendMessage(chatId, $"🥳 [{chatId}] победил!");
 
-        private void Start(ChatId chatId) => SendMessage(chatId,
+        private void Start(ChatId chatId) => SendMessage(chatId, 
             $"Бот для игры в \"крестики-нолики\"\nВаш ID: {chatId}\n\nКоманды:\n/newGame UserId - начать новую игру");
-
-        private void NewGame(ChatId chatId, string userId)
-        {
-            if (new Random().Next(0, 100) > 50)
-                GameManager.Instance.StartNewGame(chatId.ToString(), userId);
-            else
-                GameManager.Instance.StartNewGame(userId, chatId.ToString());
-        }
     }
 }
