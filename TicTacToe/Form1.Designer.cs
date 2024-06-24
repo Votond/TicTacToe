@@ -96,6 +96,7 @@
             // LogsTextBox
             // 
             LogsTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            LogsTextBox.BorderStyle = BorderStyle.None;
             LogsTextBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             LogsTextBox.ForeColor = Color.FromArgb(80, 32, 108);
             LogsTextBox.Location = new Point(10, 122);
@@ -108,6 +109,7 @@
             // LogsLabel
             // 
             LogsLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            LogsLabel.ForeColor = Color.FromArgb(80, 32, 108);
             LogsLabel.Location = new Point(221, 103);
             LogsLabel.Name = "LogsLabel";
             LogsLabel.Size = new Size(34, 15);
@@ -145,7 +147,7 @@
             BotStatusTextLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             BotStatusTextLabel.AutoSize = true;
             BotStatusTextLabel.ForeColor = Color.Red;
-            BotStatusTextLabel.Location = new Point(90, 3);
+            BotStatusTextLabel.Location = new Point(88, 3);
             BotStatusTextLabel.Name = "BotStatusTextLabel";
             BotStatusTextLabel.Size = new Size(64, 15);
             BotStatusTextLabel.TabIndex = 1;
@@ -155,7 +157,8 @@
             // 
             BotStatusLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             BotStatusLabel.AutoSize = true;
-            BotStatusLabel.Location = new Point(10, 3);
+            BotStatusLabel.ForeColor = Color.FromArgb(80, 32, 108);
+            BotStatusLabel.Location = new Point(8, 3);
             BotStatusLabel.Name = "BotStatusLabel";
             BotStatusLabel.Size = new Size(74, 15);
             BotStatusLabel.TabIndex = 0;
