@@ -75,7 +75,7 @@ namespace TicTacToe
 
             public void Start()
             {
-                var baseMessage = "Вы запустили новую игру с [%userId%]\nВы ходите %turn%\n/turn 1-9 - совершить ход";
+                var baseMessage = "✅ Запущена новая игра с [`%userId%`]\n❗ Вы ходите *%turn%*\nℹ `/turn 1-9` - совершить ход";
 
                 if (PlayerOne.State == PlayerInfo.PlayerState.Turn)
                 {
@@ -90,8 +90,8 @@ namespace TicTacToe
 
                 var image = GameDrawer.Instance.Draw(this);
 
-                TelegramBot.Instance.SendImage(PlayerOne.UserId, image);
-                TelegramBot.Instance.SendImage(PlayerTwo.UserId, image);
+                TelegramBot.Instance.SendImage(PlayerOne.UserId, image.Result);
+                TelegramBot.Instance.SendImage(PlayerTwo.UserId, image.Result);
             }
 
             public TurnStatus MakeTurn(string playerId, int cell)
@@ -144,7 +144,8 @@ namespace TicTacToe
 
                 void Win()
                 {
-                    TelegramBot.Instance.Win(player.UserId);
+                    TelegramBot.Instance.Win(PlayerOne.UserId, player.UserId);
+                    TelegramBot.Instance.Win(PlayerTwo.UserId, player.UserId);
                     Instance._games.Remove(this);
                 }
 

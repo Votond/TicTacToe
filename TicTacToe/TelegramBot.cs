@@ -15,7 +15,15 @@ namespace TicTacToe
             public static System.Drawing.Color ON = System.Drawing.Color.Green;
         }
 
-        public static TelegramBot Instance {get; private set;} = new TelegramBot();
+        private static TelegramBot? _instance;
+        public static TelegramBot Instance {
+            get {
+                if (_instance == null)
+                    _instance = new TelegramBot();
+
+                return _instance;
+            }
+        }
 
         public bool IsLaunched { private set; get; }
         private string _token;
@@ -70,6 +78,18 @@ namespace TicTacToe
                     return;
                 }
 
+                if (GameManager.Instance.GetGameByPlayerId(chatId.ToString()) != null)
+                {
+                    FinishPlaying(chatId);
+                    return;
+                }
+
+                if (GameManager.Instance.GetGameByPlayerId(split[1]) != null)
+                {
+                    FinishPlayingOther(chatId);
+                    return;
+                }
+
                 GameManager.Instance.StartNewGame(chatId.ToString(), split[1]);
             }
             else if (messageText.Contains("/turn"))
@@ -87,6 +107,14 @@ namespace TicTacToe
                 if (game == null)
                 {
                     NoGame(chatId);
+                    return;
+                }
+
+                var convertedCell = Convert.ToInt32(split[1]);
+
+                if (convertedCell > 9 || convertedCell < 1)
+                {
+                    IncorrectInput(chatId);
                     return;
                 }
 
@@ -114,8 +142,8 @@ namespace TicTacToe
                 SuccessfullyTurned(chatId);
                 SuccessfullyTurnedOther(new ChatId(Convert.ToInt64(player2)), chatId.ToString());
 
-                SendImage(chatId, GameDrawer.Instance.Draw(game));
-                SendImage(player2, GameDrawer.Instance.Draw(game));
+                SendImage(chatId, await GameDrawer.Instance.Draw(game));
+                SendImage(player2, await GameDrawer.Instance.Draw(game));
             }
             else
                 IncorrectInput(chatId);
@@ -133,9 +161,10 @@ namespace TicTacToe
             };
 
             Logs.Error(ErrorMessage);
+            throw exception;
         }
 
-        public async Task Shutdown()
+        public async void Shutdown()
         { 
             if (!IsLaunched) 
                 return;
@@ -149,6 +178,7 @@ namespace TicTacToe
         (
             chatId: chatId,
             text: message,
+            parseMode: ParseMode.MarkdownV2,
             cancellationToken: _cts.Token
         );
 
@@ -164,15 +194,16 @@ namespace TicTacToe
                 cancellationToken: _cts.Token);
         }
 
+        private void Start(ChatId chatId) => SendMessage(chatId, 
+            $"✨ *Бот для игры в _крестики нолики_*\n🆔 Ваш ID: `{chatId}`\n\nℹ Команды:\n`/newGame UserId` начать новую игру");
         private void IncorrectInput(ChatId chatId) => SendMessage(chatId, "❌ Некорректный ввод");
         private void NoGame(ChatId chatId) => SendMessage(chatId, "❌ У вас нет идущей игры");
         private void NoTurn(ChatId chatId) => SendMessage(chatId, "❌ Сейчас не ваш ход");
         private void NoAbilityToTurn(ChatId chatId) => SendMessage(chatId, "❌ Вы не можете так сходить");
         private void SuccessfullyTurned(ChatId chatId) => SendMessage(chatId, "✅ Вы совершили ход");
-        private void SuccessfullyTurnedOther(ChatId chatId, string userId) => SendMessage(chatId, $"✅ [{userId}] совершил ход");
-        public void Win(ChatId chatId) => SendMessage(chatId, $"🥳 [{chatId}] победил!");
-
-        private void Start(ChatId chatId) => SendMessage(chatId, 
-            $"Бот для игры в \"крестики-нолики\"\nВаш ID: {chatId}\n\nКоманды:\n/newGame UserId - начать новую игру");
+        private void SuccessfullyTurnedOther(ChatId chatId, string userId) => SendMessage(chatId, $"✅ [`{userId}`] совершил ход");
+        private void FinishPlaying(ChatId chatId) => SendMessage(chatId, "❌ Доиграйте текущую игру");
+        private void FinishPlayingOther(ChatId chatId) => SendMessage(chatId, "❌ Игрок должен доиграть свою игру");
+        public void Win(ChatId chatId, string winnerId) => SendMessage(chatId, $"🥳 [`{winnerId}`] победил!");
     }
 }

@@ -41,7 +41,10 @@ namespace TicTacToe
                 return;
             }
 
-            TelegramBot.Instance.Init(token);
+            new Thread(() =>
+            {
+                TelegramBot.Instance.Init(token);
+            }).Start();
 
             BotStatusTextLabel.Text = "Включён";
             BotStatusTextLabel.ForeColor = TelegramBot.StatusColors.ON;

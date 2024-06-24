@@ -19,8 +19,8 @@
             public static DrawInfo[] Infos =
             {
                 new(-65, -110, -20, 10),
-                new(105, -110, -150, 10),
-                new(280, -110, -325, 10),
+                new(105, -110, 150, 10),
+                new(280, -110, 325, 10),
 
                 new(-65, 60, -20, 180),
                 new(105, 60, 150, 180),
@@ -34,7 +34,7 @@
 
         public static GameDrawer Instance { get; private set; } = new();
 
-        public Image Draw(GameManager.Game game)
+        public async Task<Image> Draw(GameManager.Game game)
         {
             var fieldInfo = game.FieldInfo;
             var bmp = new Bitmap(500, 500);
@@ -96,7 +96,6 @@
                 }
             }
 
-            Program.MainForm.UpdateGameView(game.FieldInfo.Cells);
             return bmp;
         }
     }
