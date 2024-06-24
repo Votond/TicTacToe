@@ -75,7 +75,7 @@ namespace TicTacToe
 
             public void Start()
             {
-                var baseMessage = "✅ Запущена новая игра с [`%userId%`]\n❗ Вы ходите *%turn%*\nℹ `/turn 1-9` - совершить ход";
+                var baseMessage = "✅ Запущена новая игра с [`%userId%`]\n❗ Вы ходите *%turn%*\nℹ `/turn 1\u22199` \u2219 совершить ход";
 
                 if (PlayerOne.State == PlayerInfo.PlayerState.Turn)
                 {
@@ -141,12 +141,14 @@ namespace TicTacToe
             {
                 var cells = FieldInfo.Cells;
                 var playerChar = (player.Char == PlayerInfo.PlayerChar.Circle) ? PlayingFieldInfo.CellState.Circle : PlayingFieldInfo.CellState.Cross;
+                var win = false;
 
                 void Win()
                 {
                     TelegramBot.Instance.Win(PlayerOne.UserId, player.UserId);
                     TelegramBot.Instance.Win(PlayerTwo.UserId, player.UserId);
                     Instance._games.Remove(this);
+                    win = true;
                 }
 
                 bool Check(int i) => cells[i] == playerChar;
@@ -227,6 +229,22 @@ namespace TicTacToe
                         else if (Check(4) && Check(0))
                             Win();
                         break;
+                }
+
+                if (!win)
+                {
+                    int availableCellsAmount = 9;
+
+                    foreach (var cellState in cells)
+                        if (cellState != PlayingFieldInfo.CellState.None)
+                            availableCellsAmount--;
+
+                    if (availableCellsAmount < 1)
+                    {
+                        TelegramBot.Instance.Draw(PlayerOne.UserId);
+                        TelegramBot.Instance.Draw(PlayerTwo.UserId);
+                        Instance._games.Remove(this);
+                    }
                 }
             }
         }

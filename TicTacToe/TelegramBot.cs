@@ -161,7 +161,6 @@ namespace TicTacToe
             };
 
             Logs.Error(ErrorMessage);
-            throw exception;
         }
 
         public async void Shutdown()
@@ -195,7 +194,7 @@ namespace TicTacToe
         }
 
         private void Start(ChatId chatId) => SendMessage(chatId, 
-            $"✨ *Бот для игры в _крестики нолики_*\n🆔 Ваш ID: `{chatId}`\n\nℹ Команды:\n`/newGame UserId` начать новую игру");
+            $"✨ *Бот для игры в _крестики \u2219 нолики_*\n🆔 Ваш ID: `{chatId}`\n\nℹ Команды:\n`/newGame UserId` \u2219 начать новую игру");
         private void IncorrectInput(ChatId chatId) => SendMessage(chatId, "❌ Некорректный ввод");
         private void NoGame(ChatId chatId) => SendMessage(chatId, "❌ У вас нет идущей игры");
         private void NoTurn(ChatId chatId) => SendMessage(chatId, "❌ Сейчас не ваш ход");
@@ -204,6 +203,7 @@ namespace TicTacToe
         private void SuccessfullyTurnedOther(ChatId chatId, string userId) => SendMessage(chatId, $"✅ [`{userId}`] совершил ход");
         private void FinishPlaying(ChatId chatId) => SendMessage(chatId, "❌ Доиграйте текущую игру");
         private void FinishPlayingOther(ChatId chatId) => SendMessage(chatId, "❌ Игрок должен доиграть свою игру");
-        public void Win(ChatId chatId, string winnerId) => SendMessage(chatId, $"🥳 [`{winnerId}`] победил!");
+        public void Win(ChatId chatId, string winnerId) => SendMessage(chatId, $"🥳 [`{winnerId}`] победил");
+        public void Draw(ChatId chatId) => SendMessage(chatId, "ℹ Ничья");
     }
 }

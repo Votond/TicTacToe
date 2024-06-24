@@ -12,25 +12,6 @@ namespace TicTacToe
             LogsTextBox.Text += message;
         }
 
-        public void UpdateGameView(GameManager.Game.PlayingFieldInfo.CellState[] cells)
-        {
-            int i = 0;
-            foreach (var cell in cells)
-            {
-                if (cell != GameManager.Game.PlayingFieldInfo.CellState.None)
-                {
-                    ((PictureBox) GameViewPanel.Controls[i]).Visible = true;
-                    ((PictureBox) GameViewPanel.Controls[i]).Image = (cell == GameManager.Game.PlayingFieldInfo.CellState.Cross) ? Properties.Resources.cross : Properties.Resources.circle;
-                }
-                else
-                {
-                    ((PictureBox) GameViewPanel.Controls[i]).Visible = false;
-                }
-
-                i++;
-            }
-        }
-
         private void EnableBotButton_Click(object sender, EventArgs e)
         {
             var token = TokenTextBox.Text;
@@ -72,11 +53,6 @@ namespace TicTacToe
         private void MainForm_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
-        }
-
-        private void Cell_Click(object sender, EventArgs e)
-        {
-            ((PictureBox) sender).Image = (((PictureBox)sender).Image == Properties.Resources.cross) ? Properties.Resources.circle : Properties.Resources.cross;
         }
     }
 }

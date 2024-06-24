@@ -28,49 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             TabControl = new TabControl();
             AdminPage = new TabPage();
-            TableLayoutPanel = new TableLayoutPanel();
-            GameBox = new GroupBox();
-            GameViewPanel = new TableLayoutPanel();
-            Cell9 = new PictureBox();
-            Cell8 = new PictureBox();
-            Cell7 = new PictureBox();
-            Cell6 = new PictureBox();
-            Cell5 = new PictureBox();
-            Cell4 = new PictureBox();
-            Cell3 = new PictureBox();
-            Cell2 = new PictureBox();
-            Cell1 = new PictureBox();
-            BotBox = new GroupBox();
             ClearLogsButton = new Button();
-            LogsLabel = new Label();
             LogsTextBox = new RichTextBox();
+            LogsLabel = new Label();
             DisableBotButton = new Button();
-            EnableBotButton = new Button();
             TokenTextBox = new TextBox();
             BotStatusTextLabel = new Label();
             BotStatusLabel = new Label();
+            EnableBotButton = new Button();
             GamePage = new TabPage();
-            BorderPanel1 = new Panel();
-            BorderPanel2 = new Panel();
-            BorderPanel3 = new Panel();
-            BorderPanel4 = new Panel();
+            GameRulesLabel = new Label();
+            GameRulesTextBox = new TextBox();
+            GameDescLabel = new Label();
+            GameDescTextBox = new TextBox();
             TabControl.SuspendLayout();
             AdminPage.SuspendLayout();
-            TableLayoutPanel.SuspendLayout();
-            GameBox.SuspendLayout();
-            GameViewPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Cell9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Cell1).BeginInit();
-            BotBox.SuspendLayout();
+            GamePage.SuspendLayout();
             SuspendLayout();
             // 
             // TabControl
@@ -81,272 +57,95 @@
             TabControl.Location = new Point(0, 0);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
-            TabControl.Size = new Size(484, 461);
+            TabControl.Size = new Size(484, 438);
             TabControl.TabIndex = 0;
             // 
             // AdminPage
             // 
-            AdminPage.Controls.Add(TableLayoutPanel);
+            AdminPage.Controls.Add(ClearLogsButton);
+            AdminPage.Controls.Add(LogsTextBox);
+            AdminPage.Controls.Add(LogsLabel);
+            AdminPage.Controls.Add(DisableBotButton);
+            AdminPage.Controls.Add(TokenTextBox);
+            AdminPage.Controls.Add(BotStatusTextLabel);
+            AdminPage.Controls.Add(BotStatusLabel);
+            AdminPage.Controls.Add(EnableBotButton);
             AdminPage.Location = new Point(4, 24);
             AdminPage.Name = "AdminPage";
             AdminPage.Padding = new Padding(3);
-            AdminPage.Size = new Size(476, 433);
+            AdminPage.Size = new Size(476, 410);
             AdminPage.TabIndex = 0;
             AdminPage.Text = "Админ панель";
             AdminPage.UseVisualStyleBackColor = true;
             // 
-            // TableLayoutPanel
-            // 
-            TableLayoutPanel.ColumnCount = 2;
-            TableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            TableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            TableLayoutPanel.Controls.Add(GameBox, 1, 0);
-            TableLayoutPanel.Controls.Add(BotBox, 0, 0);
-            TableLayoutPanel.Dock = DockStyle.Fill;
-            TableLayoutPanel.Location = new Point(3, 3);
-            TableLayoutPanel.Name = "TableLayoutPanel";
-            TableLayoutPanel.RowCount = 1;
-            TableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            TableLayoutPanel.Size = new Size(470, 427);
-            TableLayoutPanel.TabIndex = 0;
-            // 
-            // GameBox
-            // 
-            GameBox.Controls.Add(BorderPanel4);
-            GameBox.Controls.Add(BorderPanel3);
-            GameBox.Controls.Add(BorderPanel2);
-            GameBox.Controls.Add(BorderPanel1);
-            GameBox.Controls.Add(GameViewPanel);
-            GameBox.Dock = DockStyle.Fill;
-            GameBox.Location = new Point(238, 3);
-            GameBox.Name = "GameBox";
-            GameBox.Size = new Size(229, 421);
-            GameBox.TabIndex = 1;
-            GameBox.TabStop = false;
-            GameBox.Text = "Игра";
-            // 
-            // GameViewPanel
-            // 
-            GameViewPanel.ColumnCount = 3;
-            GameViewPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            GameViewPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            GameViewPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            GameViewPanel.Controls.Add(Cell9, 2, 2);
-            GameViewPanel.Controls.Add(Cell8, 1, 2);
-            GameViewPanel.Controls.Add(Cell7, 0, 2);
-            GameViewPanel.Controls.Add(Cell6, 2, 1);
-            GameViewPanel.Controls.Add(Cell5, 1, 1);
-            GameViewPanel.Controls.Add(Cell4, 0, 1);
-            GameViewPanel.Controls.Add(Cell3, 2, 0);
-            GameViewPanel.Controls.Add(Cell2, 1, 0);
-            GameViewPanel.Controls.Add(Cell1, 0, 0);
-            GameViewPanel.Location = new Point(14, 110);
-            GameViewPanel.Name = "GameViewPanel";
-            GameViewPanel.RowCount = 3;
-            GameViewPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            GameViewPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            GameViewPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            GameViewPanel.Size = new Size(200, 200);
-            GameViewPanel.TabIndex = 0;
-            // 
-            // Cell9
-            // 
-            Cell9.Dock = DockStyle.Fill;
-            Cell9.Image = Properties.Resources.cross;
-            Cell9.Location = new Point(135, 135);
-            Cell9.Name = "Cell9";
-            Cell9.Size = new Size(62, 62);
-            Cell9.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell9.TabIndex = 8;
-            Cell9.TabStop = false;
-            Cell9.Visible = false;
-            Cell9.Click += Cell_Click;
-            // 
-            // Cell8
-            // 
-            Cell8.Dock = DockStyle.Fill;
-            Cell8.Image = Properties.Resources.cross;
-            Cell8.Location = new Point(69, 135);
-            Cell8.Name = "Cell8";
-            Cell8.Size = new Size(60, 62);
-            Cell8.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell8.TabIndex = 7;
-            Cell8.TabStop = false;
-            Cell8.Visible = false;
-            Cell8.Click += Cell_Click;
-            // 
-            // Cell7
-            // 
-            Cell7.Dock = DockStyle.Fill;
-            Cell7.Image = Properties.Resources.cross;
-            Cell7.Location = new Point(3, 135);
-            Cell7.Name = "Cell7";
-            Cell7.Size = new Size(60, 62);
-            Cell7.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell7.TabIndex = 6;
-            Cell7.TabStop = false;
-            Cell7.Visible = false;
-            Cell7.Click += Cell_Click;
-            // 
-            // Cell6
-            // 
-            Cell6.Dock = DockStyle.Fill;
-            Cell6.Image = Properties.Resources.cross;
-            Cell6.Location = new Point(135, 69);
-            Cell6.Name = "Cell6";
-            Cell6.Size = new Size(62, 60);
-            Cell6.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell6.TabIndex = 5;
-            Cell6.TabStop = false;
-            Cell6.Visible = false;
-            Cell6.Click += Cell_Click;
-            // 
-            // Cell5
-            // 
-            Cell5.Dock = DockStyle.Fill;
-            Cell5.Image = Properties.Resources.cross;
-            Cell5.Location = new Point(69, 69);
-            Cell5.Name = "Cell5";
-            Cell5.Size = new Size(60, 60);
-            Cell5.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell5.TabIndex = 4;
-            Cell5.TabStop = false;
-            Cell5.Visible = false;
-            Cell5.Click += Cell_Click;
-            // 
-            // Cell4
-            // 
-            Cell4.Dock = DockStyle.Fill;
-            Cell4.Image = Properties.Resources.cross;
-            Cell4.Location = new Point(3, 69);
-            Cell4.Name = "Cell4";
-            Cell4.Size = new Size(60, 60);
-            Cell4.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell4.TabIndex = 3;
-            Cell4.TabStop = false;
-            Cell4.Visible = false;
-            Cell4.Click += Cell_Click;
-            // 
-            // Cell3
-            // 
-            Cell3.Dock = DockStyle.Fill;
-            Cell3.Image = Properties.Resources.cross;
-            Cell3.Location = new Point(135, 3);
-            Cell3.Name = "Cell3";
-            Cell3.Size = new Size(62, 60);
-            Cell3.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell3.TabIndex = 2;
-            Cell3.TabStop = false;
-            Cell3.Visible = false;
-            Cell3.Click += Cell_Click;
-            // 
-            // Cell2
-            // 
-            Cell2.Dock = DockStyle.Fill;
-            Cell2.Image = Properties.Resources.cross;
-            Cell2.Location = new Point(69, 3);
-            Cell2.Name = "Cell2";
-            Cell2.Size = new Size(60, 60);
-            Cell2.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell2.TabIndex = 1;
-            Cell2.TabStop = false;
-            Cell2.Visible = false;
-            Cell2.Click += Cell_Click;
-            // 
-            // Cell1
-            // 
-            Cell1.Dock = DockStyle.Fill;
-            Cell1.Image = Properties.Resources.cross;
-            Cell1.Location = new Point(3, 3);
-            Cell1.Name = "Cell1";
-            Cell1.Size = new Size(60, 60);
-            Cell1.SizeMode = PictureBoxSizeMode.StretchImage;
-            Cell1.TabIndex = 0;
-            Cell1.TabStop = false;
-            Cell1.Visible = false;
-            Cell1.Click += Cell_Click;
-            // 
-            // BotBox
-            // 
-            BotBox.Controls.Add(ClearLogsButton);
-            BotBox.Controls.Add(LogsLabel);
-            BotBox.Controls.Add(LogsTextBox);
-            BotBox.Controls.Add(DisableBotButton);
-            BotBox.Controls.Add(EnableBotButton);
-            BotBox.Controls.Add(TokenTextBox);
-            BotBox.Controls.Add(BotStatusTextLabel);
-            BotBox.Controls.Add(BotStatusLabel);
-            BotBox.Dock = DockStyle.Fill;
-            BotBox.Location = new Point(3, 3);
-            BotBox.Name = "BotBox";
-            BotBox.Size = new Size(229, 421);
-            BotBox.TabIndex = 0;
-            BotBox.TabStop = false;
-            BotBox.Text = "Бот";
-            // 
             // ClearLogsButton
             // 
-            ClearLogsButton.Location = new Point(47, 343);
+            ClearLogsButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ClearLogsButton.BackColor = Color.FromArgb(80, 32, 108);
+            ClearLogsButton.FlatStyle = FlatStyle.Flat;
+            ClearLogsButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            ClearLogsButton.ForeColor = Color.White;
+            ClearLogsButton.Location = new Point(177, 329);
             ClearLogsButton.Name = "ClearLogsButton";
-            ClearLogsButton.Size = new Size(135, 24);
+            ClearLogsButton.Size = new Size(122, 24);
             ClearLogsButton.TabIndex = 7;
             ClearLogsButton.Text = "Очистить логи";
-            ClearLogsButton.UseVisualStyleBackColor = true;
+            ClearLogsButton.UseVisualStyleBackColor = false;
             ClearLogsButton.Click += ClearLogsButton_Click;
+            // 
+            // LogsTextBox
+            // 
+            LogsTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            LogsTextBox.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LogsTextBox.ForeColor = Color.FromArgb(80, 32, 108);
+            LogsTextBox.Location = new Point(10, 122);
+            LogsTextBox.Name = "LogsTextBox";
+            LogsTextBox.ReadOnly = true;
+            LogsTextBox.Size = new Size(458, 202);
+            LogsTextBox.TabIndex = 5;
+            LogsTextBox.Text = "";
             // 
             // LogsLabel
             // 
-            LogsLabel.AutoSize = true;
-            LogsLabel.Location = new Point(97, 117);
+            LogsLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            LogsLabel.Location = new Point(221, 103);
             LogsLabel.Name = "LogsLabel";
             LogsLabel.Size = new Size(34, 15);
             LogsLabel.TabIndex = 6;
             LogsLabel.Text = "Логи";
-            // 
-            // LogsTextBox
-            // 
-            LogsTextBox.Location = new Point(6, 135);
-            LogsTextBox.Name = "LogsTextBox";
-            LogsTextBox.ReadOnly = true;
-            LogsTextBox.Size = new Size(217, 202);
-            LogsTextBox.TabIndex = 5;
-            LogsTextBox.Text = "";
+            LogsLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // DisableBotButton
             // 
-            DisableBotButton.Location = new Point(6, 373);
+            DisableBotButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            DisableBotButton.BackColor = Color.FromArgb(80, 32, 108);
+            DisableBotButton.FlatStyle = FlatStyle.Flat;
+            DisableBotButton.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            DisableBotButton.ForeColor = Color.White;
+            DisableBotButton.Location = new Point(10, 360);
             DisableBotButton.Name = "DisableBotButton";
-            DisableBotButton.Size = new Size(217, 42);
+            DisableBotButton.Size = new Size(458, 42);
             DisableBotButton.TabIndex = 4;
             DisableBotButton.Text = "Отключить бота";
-            DisableBotButton.UseVisualStyleBackColor = true;
+            DisableBotButton.UseVisualStyleBackColor = false;
             DisableBotButton.Click += DisableBotButton_Click;
-            // 
-            // EnableBotButton
-            // 
-            EnableBotButton.Location = new Point(6, 72);
-            EnableBotButton.Name = "EnableBotButton";
-            EnableBotButton.Size = new Size(217, 42);
-            EnableBotButton.TabIndex = 3;
-            EnableBotButton.Text = "Запустить бота";
-            EnableBotButton.UseVisualStyleBackColor = true;
-            EnableBotButton.Click += EnableBotButton_Click;
             // 
             // TokenTextBox
             // 
             TokenTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TokenTextBox.Location = new Point(6, 43);
+            TokenTextBox.Location = new Point(10, 30);
             TokenTextBox.Name = "TokenTextBox";
             TokenTextBox.PlaceholderText = "Токен бота";
-            TokenTextBox.Size = new Size(217, 23);
+            TokenTextBox.Size = new Size(458, 23);
             TokenTextBox.TabIndex = 2;
             TokenTextBox.UseSystemPasswordChar = true;
             // 
             // BotStatusTextLabel
             // 
+            BotStatusTextLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             BotStatusTextLabel.AutoSize = true;
             BotStatusTextLabel.ForeColor = Color.Red;
-            BotStatusTextLabel.Location = new Point(79, 19);
+            BotStatusTextLabel.Location = new Point(90, 3);
             BotStatusTextLabel.Name = "BotStatusTextLabel";
             BotStatusTextLabel.Size = new Size(64, 15);
             BotStatusTextLabel.TabIndex = 1;
@@ -354,85 +153,109 @@
             // 
             // BotStatusLabel
             // 
+            BotStatusLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             BotStatusLabel.AutoSize = true;
-            BotStatusLabel.Location = new Point(6, 19);
+            BotStatusLabel.Location = new Point(10, 3);
             BotStatusLabel.Name = "BotStatusLabel";
             BotStatusLabel.Size = new Size(74, 15);
             BotStatusLabel.TabIndex = 0;
             BotStatusLabel.Text = "Статус бота:";
             // 
+            // EnableBotButton
+            // 
+            EnableBotButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            EnableBotButton.BackColor = Color.FromArgb(80, 32, 108);
+            EnableBotButton.FlatStyle = FlatStyle.Flat;
+            EnableBotButton.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            EnableBotButton.ForeColor = Color.White;
+            EnableBotButton.Location = new Point(10, 59);
+            EnableBotButton.Name = "EnableBotButton";
+            EnableBotButton.Size = new Size(458, 42);
+            EnableBotButton.TabIndex = 3;
+            EnableBotButton.Text = "Запустить бота";
+            EnableBotButton.UseVisualStyleBackColor = false;
+            EnableBotButton.Click += EnableBotButton_Click;
+            // 
             // GamePage
             // 
+            GamePage.Controls.Add(GameRulesLabel);
+            GamePage.Controls.Add(GameRulesTextBox);
+            GamePage.Controls.Add(GameDescLabel);
+            GamePage.Controls.Add(GameDescTextBox);
             GamePage.Location = new Point(4, 24);
             GamePage.Name = "GamePage";
             GamePage.Padding = new Padding(3);
-            GamePage.Size = new Size(476, 433);
+            GamePage.Size = new Size(476, 410);
             GamePage.TabIndex = 1;
             GamePage.Text = "Игра";
             GamePage.UseVisualStyleBackColor = true;
             // 
-            // BorderPanel1
+            // GameRulesLabel
             // 
-            BorderPanel1.BackColor = Color.Black;
-            BorderPanel1.ForeColor = Color.Black;
-            BorderPanel1.Location = new Point(77, 109);
-            BorderPanel1.Name = "BorderPanel1";
-            BorderPanel1.Size = new Size(5, 200);
-            BorderPanel1.TabIndex = 1;
+            GameRulesLabel.AutoSize = true;
+            GameRulesLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            GameRulesLabel.ForeColor = Color.FromArgb(80, 32, 108);
+            GameRulesLabel.Location = new Point(7, 98);
+            GameRulesLabel.Name = "GameRulesLabel";
+            GameRulesLabel.Size = new Size(74, 21);
+            GameRulesLabel.TabIndex = 11;
+            GameRulesLabel.Text = "Правила:";
             // 
-            // BorderPanel2
+            // GameRulesTextBox
             // 
-            BorderPanel2.BackColor = Color.Black;
-            BorderPanel2.ForeColor = Color.Black;
-            BorderPanel2.Location = new Point(143, 109);
-            BorderPanel2.Name = "BorderPanel2";
-            BorderPanel2.Size = new Size(5, 200);
-            BorderPanel2.TabIndex = 2;
+            GameRulesTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            GameRulesTextBox.BackColor = Color.White;
+            GameRulesTextBox.BorderStyle = BorderStyle.None;
+            GameRulesTextBox.Location = new Point(8, 120);
+            GameRulesTextBox.Multiline = true;
+            GameRulesTextBox.Name = "GameRulesTextBox";
+            GameRulesTextBox.ReadOnly = true;
+            GameRulesTextBox.Size = new Size(458, 140);
+            GameRulesTextBox.TabIndex = 10;
+            GameRulesTextBox.Text = resources.GetString("GameRulesTextBox.Text");
             // 
-            // BorderPanel3
+            // GameDescLabel
             // 
-            BorderPanel3.BackColor = Color.Black;
-            BorderPanel3.ForeColor = Color.Black;
-            BorderPanel3.Location = new Point(14, 173);
-            BorderPanel3.Name = "BorderPanel3";
-            BorderPanel3.Size = new Size(200, 5);
-            BorderPanel3.TabIndex = 2;
+            GameDescLabel.AutoSize = true;
+            GameDescLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            GameDescLabel.ForeColor = Color.FromArgb(80, 32, 108);
+            GameDescLabel.Location = new Point(6, 3);
+            GameDescLabel.Name = "GameDescLabel";
+            GameDescLabel.Size = new Size(84, 21);
+            GameDescLabel.TabIndex = 9;
+            GameDescLabel.Text = "Описание:";
             // 
-            // BorderPanel4
+            // GameDescTextBox
             // 
-            BorderPanel4.BackColor = Color.Black;
-            BorderPanel4.ForeColor = Color.Black;
-            BorderPanel4.Location = new Point(14, 239);
-            BorderPanel4.Name = "BorderPanel4";
-            BorderPanel4.Size = new Size(200, 5);
-            BorderPanel4.TabIndex = 3;
+            GameDescTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            GameDescTextBox.BackColor = Color.White;
+            GameDescTextBox.BorderStyle = BorderStyle.None;
+            GameDescTextBox.ForeColor = SystemColors.WindowText;
+            GameDescTextBox.Location = new Point(8, 25);
+            GameDescTextBox.Multiline = true;
+            GameDescTextBox.Name = "GameDescTextBox";
+            GameDescTextBox.ReadOnly = true;
+            GameDescTextBox.Size = new Size(458, 50);
+            GameDescTextBox.TabIndex = 8;
+            GameDescTextBox.Text = resources.GetString("GameDescTextBox.Text");
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(484, 461);
+            ClientSize = new Size(484, 438);
             Controls.Add(TabControl);
-            MinimumSize = new Size(500, 500);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(9999, 477);
+            MinimumSize = new Size(500, 477);
             Name = "MainForm";
             Text = "Крестики-нолики";
             Load += MainForm_Load;
             TabControl.ResumeLayout(false);
             AdminPage.ResumeLayout(false);
-            TableLayoutPanel.ResumeLayout(false);
-            GameBox.ResumeLayout(false);
-            GameViewPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)Cell9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Cell1).EndInit();
-            BotBox.ResumeLayout(false);
-            BotBox.PerformLayout();
+            AdminPage.PerformLayout();
+            GamePage.ResumeLayout(false);
+            GamePage.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -441,9 +264,6 @@
         private TabControl TabControl;
         private TabPage AdminPage;
         private TabPage GamePage;
-        private TableLayoutPanel TableLayoutPanel;
-        private GroupBox GameBox;
-        private GroupBox BotBox;
         private TextBox TokenTextBox;
         private Label BotStatusTextLabel;
         private Label BotStatusLabel;
@@ -452,19 +272,9 @@
         private Label LogsLabel;
         private Button ClearLogsButton;
         private RichTextBox LogsTextBox;
-        private TableLayoutPanel GameViewPanel;
-        private PictureBox Cell1;
-        private PictureBox Cell9;
-        private PictureBox Cell8;
-        private PictureBox Cell7;
-        private PictureBox Cell6;
-        private PictureBox Cell5;
-        private PictureBox Cell4;
-        private PictureBox Cell3;
-        private PictureBox Cell2;
-        private Panel BorderPanel4;
-        private Panel BorderPanel3;
-        private Panel BorderPanel2;
-        private Panel BorderPanel1;
+        private TextBox GameDescTextBox;
+        private Label GameDescLabel;
+        private Label GameRulesLabel;
+        private TextBox GameRulesTextBox;
     }
 }
