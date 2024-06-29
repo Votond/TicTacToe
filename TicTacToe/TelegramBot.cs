@@ -4,6 +4,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TicTacToe
 {
@@ -78,6 +79,12 @@ namespace TicTacToe
                     return;
                 }
 
+                if (chatId.ToString() == split[1])
+                {
+                    YouCantPlayWithYourself(chatId);
+                    return;
+                }
+
                 if (GameManager.Instance.GetGameByPlayerId(chatId.ToString()) != null)
                 {
                     FinishPlaying(chatId);
@@ -120,13 +127,13 @@ namespace TicTacToe
 
                 var turnStatus = game.MakeTurn(chatId.ToString(), Convert.ToInt32(split[1]));
 
-                if (turnStatus == GameManager.Game.TurnStatus.NoTurn)
+                if (turnStatus == Game.TurnStatus.NoTurn)
                 {
                     NoTurn(chatId);
                     return;
                 }
 
-                if (turnStatus == GameManager.Game.TurnStatus.NoAbilityToTurn)
+                if (turnStatus == Game.TurnStatus.NoAbilityToTurn)
                 {
                     NoAbilityToTurn(chatId);
                     return;
@@ -173,13 +180,27 @@ namespace TicTacToe
             Logs.Info("Бот отключен");
         }
 
-        public async void SendMessage(ChatId chatId, string message) => await _botClient.SendTextMessageAsync
-        (
-            chatId: chatId,
-            text: message,
-            parseMode: ParseMode.MarkdownV2,
-            cancellationToken: _cts.Token
-        );
+        public async void SendMessage(ChatId chatId, string message, KeyboardButton[][]? buttons = null, bool removeKeyboard = false)
+        {
+            if (removeKeyboard)
+                await _botClient.SendTextMessageAsync
+                (
+                    chatId: chatId,
+                    text: message,
+                    parseMode: ParseMode.MarkdownV2,
+                    replyMarkup: new ReplyKeyboardRemove(),
+                    cancellationToken: _cts.Token
+                );
+            else
+                await _botClient.SendTextMessageAsync
+                (
+                    chatId: chatId,
+                    text: message,
+                    parseMode: ParseMode.MarkdownV2,
+                    replyMarkup: buttons != null ? new ReplyKeyboardMarkup(buttons) : null,
+                    cancellationToken: _cts.Token
+                );
+        }
 
         public async void SendImage(ChatId chatId, Image image)
         {
@@ -194,16 +215,17 @@ namespace TicTacToe
         }
 
         private void Start(ChatId chatId) => SendMessage(chatId, 
-            $"✨ *Бот для игры в _крестики \u2219 нолики_*\n🆔 Ваш ID: `{chatId}`\n\nℹ Команды:\n`/newGame UserId` \u2219 начать новую игру");
+            $"✨ *Бот для игры в _крестики \u2219  нолики_*\n🆔 Ваш ID: `{chatId}`\n\nℹ Команды:\n`/newGame UserId` \u2219 начать новую игру", removeKeyboard: true);
         private void IncorrectInput(ChatId chatId) => SendMessage(chatId, "❌ Некорректный ввод");
-        private void NoGame(ChatId chatId) => SendMessage(chatId, "❌ У вас нет идущей игры");
+        private void NoGame(ChatId chatId) => SendMessage(chatId, "❌ У вас нет идущей игры", removeKeyboard: true);
         private void NoTurn(ChatId chatId) => SendMessage(chatId, "❌ Сейчас не ваш ход");
         private void NoAbilityToTurn(ChatId chatId) => SendMessage(chatId, "❌ Вы не можете так сходить");
         private void SuccessfullyTurned(ChatId chatId) => SendMessage(chatId, "✅ Вы совершили ход");
         private void SuccessfullyTurnedOther(ChatId chatId, string userId) => SendMessage(chatId, $"✅ [`{userId}`] совершил ход");
         private void FinishPlaying(ChatId chatId) => SendMessage(chatId, "❌ Доиграйте текущую игру");
         private void FinishPlayingOther(ChatId chatId) => SendMessage(chatId, "❌ Игрок должен доиграть свою игру");
-        public void Win(ChatId chatId, string winnerId) => SendMessage(chatId, $"🥳 [`{winnerId}`] победил");
-        public void Draw(ChatId chatId) => SendMessage(chatId, "ℹ Ничья");
+        private void YouCantPlayWithYourself(ChatId chatId) => SendMessage(chatId, "❌ Вы не можете начать игру с самим собой", removeKeyboard: true);
+        public void Win(ChatId chatId, string winnerId) => SendMessage(chatId, $"🥳 [`{winnerId}`] победил", removeKeyboard: true);
+        public void Draw(ChatId chatId) => SendMessage(chatId, "ℹ Ничья", removeKeyboard: true);
     }
 }

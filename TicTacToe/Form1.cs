@@ -22,12 +22,18 @@ namespace TicTacToe
                 return;
             }
 
+            if (TelegramBot.Instance.IsLaunched)
+            {
+                MessageBox.Show("Бот уже включен", "Telegram Bot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             new Thread(() =>
             {
                 TelegramBot.Instance.Init(token);
             }).Start();
 
-            BotStatusTextLabel.Text = "Включён";
+            BotStatusTextLabel.Text = "Включен";
             BotStatusTextLabel.ForeColor = TelegramBot.StatusColors.ON;
         }
 
@@ -41,7 +47,7 @@ namespace TicTacToe
 
             TelegramBot.Instance.Shutdown();
 
-            BotStatusTextLabel.Text = "Отключён";
+            BotStatusTextLabel.Text = "Отключен";
             BotStatusTextLabel.ForeColor = TelegramBot.StatusColors.OFF;
         }
 

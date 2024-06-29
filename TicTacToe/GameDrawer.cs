@@ -34,7 +34,7 @@
 
         public static GameDrawer Instance { get; private set; } = new();
 
-        public async Task<Image> Draw(GameManager.Game game)
+        public async Task<Image> Draw(Game game)
         {
             var fieldInfo = game.FieldInfo;
             var bmp = new Bitmap(500, 500);
@@ -74,12 +74,12 @@
 
                     switch (fieldInfo.Cells[i])
                     {
-                        case GameManager.Game.PlayingFieldInfo.CellState.Cross:
+                        case Game.PlayingFieldInfo.CellState.Cross:
                             x = DrawInfos.Infos[i].CrossPosition.Key;
                             y = DrawInfos.Infos[i].CrossPosition.Value;
                             break;
 
-                        case GameManager.Game.PlayingFieldInfo.CellState.Circle:
+                        case Game.PlayingFieldInfo.CellState.Circle:
                             x = DrawInfos.Infos[i].CirclePosition.Key;
                             y = DrawInfos.Infos[i].CirclePosition.Value;
                             isCircle = true;
