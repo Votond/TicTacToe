@@ -1,6 +1,6 @@
 ﻿namespace TicTacToe
 {
-    internal class GameDrawer
+    internal class GameDrawerImpl : IGameDrawer
     {
         public static class DrawInfos
         {
@@ -32,7 +32,7 @@
             };
         }
 
-        public static GameDrawer Instance { get; private set; } = new();
+        public static GameDrawerImpl Instance { get; private set; } = new();
 
         public async Task<Image> Draw(Game game)
         {

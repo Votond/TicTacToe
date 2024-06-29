@@ -149,8 +149,8 @@ namespace TicTacToe
                 SuccessfullyTurned(chatId);
                 SuccessfullyTurnedOther(new ChatId(Convert.ToInt64(player2)), chatId.ToString());
 
-                SendImage(chatId, await GameDrawer.Instance.Draw(game));
-                SendImage(player2, await GameDrawer.Instance.Draw(game));
+                SendImage(chatId, await GameDrawerImpl.Instance.Draw(game));
+                SendImage(player2, await GameDrawerImpl.Instance.Draw(game));
             }
             else
                 IncorrectInput(chatId);
